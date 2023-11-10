@@ -14,10 +14,9 @@ def get_player_move(board, symbol):
     return int(i)
 
 def get_computer_move(board, symbol):
-    free_i = []
-    for i in range(len(board)):
-        if board[i] not in "XO":
-            free_i.append(i)
+    free_i = [i for i in range(len(board)) if board[i] not in "XO"]
+    if not free_i:
+        return None
     return random.choice(free_i)
 
 def check_win(board, symbol):
@@ -43,6 +42,9 @@ def main():
     draw_board(board)
     while True:
         computer_i = get_computer_move(board, computer_symbol)
+        if computer_i is None:
+            print("Ничья! Игра завершена.")
+            break
         board[computer_i] = computer_symbol
         print("Доска после хода компьютера")
         draw_board(board)
