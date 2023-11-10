@@ -1,45 +1,48 @@
-# задание 1
-def наименьшее_общее_кратное(a, b):
-    def наибольший_общий_делитель(x, y):
-        while y:
-            x, y = y, x % y
-        return x
+# Задание 1
 
-    return abs(a * b) // наибольший_общий_делитель(a, b)
+def nod(x, y):
+    while y:
+        x, y = y, x % y
+    return x
+
+def nok(a, b):
+    return abs(a * b) // nod(a, b)
 
 a = int(input("Введите первое число: "))
 b = int(input("Введите второе число: "))
 
-result = наименьшее_общее_кратное(a, b)
+result = nok(a, b)
 print(f"Наименьшее общее кратное чисел {a} и {b} равно {result}.")
 
-# заадние 2
-def находи_простые(n):
-    простые = []
-    for число in range(2, n + 1):
-        простое = True
-        for делитель in range(2, число):
-            if (число % делитель) == 0:
-                простое = False
+
+# Задание 2
+
+def find_simple(n):
+    simple = []
+    for i in range(2, n + 1):
+        is_simple = True
+        for delit in range(2, int(i**0.5) + 1):
+            if i % delit == 0:
+                is_simple = False
                 break
-        if простое:
-            простые.append(число)
-    return простые
+        if is_simple:
+            simple.append(i)
+    return simple
 
 n = int(input("Введите число n: "))
 
-простые_числа = находи_простые(n)
-print(f"Простые числа от 1 до {n}: {простые_числа}")
+simple_numbers = find_simple(n)
+print(f"Простые числа от 1 до {n}: {simple_numbers}")
 
-# задание 3
-def находи_делители(n):
-    делители = []
-    for i in range(1, n + 1):
-        if n % i == 0:
-            делители.append(i)
-    return делители
+
+# Задание 3
+
+def find_delit(n):
+    delit = [i for i in range(1, n + 1) if n % i == 0]
+    return delit
 
 n = int(input("Введите число n: "))
 
-делители_числа = находи_делители(n)
-print(f"Делители числа {n}: {делители_числа}")
+delit = find_delit(n)
+print(f"Делители числа {n}: {delit}")
+
